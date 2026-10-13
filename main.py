@@ -6,6 +6,7 @@ from matplotlib.animation import FuncAnimation
 # Simulation Parameters
 AREA_SIZE = 100.0
 NUM_PLASTICS = 15
+SPAWN_MARGIN = 5.0  # Margin from edges to spawn plastics
 SC_CAPACITY = 3
 SPEED_SC = 1.5
 SPEED_T = 2.0
@@ -189,7 +190,7 @@ class MarineCollectionModel(mesa.Model):
         # Add Plastics with random positions and weights
         for _ in range(num_plastics):
             p = PlasticAgent(self)
-            pos = tuple(np.random.rand(2) * AREA_SIZE)
+            pos = tuple(np.random.uniform(SPAWN_MARGIN, AREA_SIZE - SPAWN_MARGIN, size=2))
             self.grid.place_agent(p, pos)
 
     def step(self):
